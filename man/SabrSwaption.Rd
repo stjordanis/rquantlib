@@ -1,4 +1,3 @@
-% $Id: SabrSwaption.Rd,v 1.0 2016/04/07 tleitch Exp $
 \name{SabrSwaption}
 \alias{SabrSwaption}
 \alias{SabrSwaption.default}
@@ -110,5 +109,6 @@ swaplegparams=list(fixFreq="Semiannual",floatFreq="Quarterly")
 data(vcube)
 pricing <- SabrSwaption(params, dcurve,vcube,swaplegparams)
 pricing
+
 }
 \keyword{models}

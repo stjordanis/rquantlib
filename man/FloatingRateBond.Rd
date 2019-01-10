@@ -1,4 +1,3 @@
-% $Id: FloatingRateBond.Rd 87 2009-06-09 16:48:13Z knguyen $
 \name{FloatingRateBond}
 \alias{FloatingRateBond}
 \alias{FloatingRateBond.default}

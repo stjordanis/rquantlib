@@ -78,7 +78,9 @@ print(BinaryOption(binType="cash", type="put", excType="european",
 ## asianoption.cpp:  put == 4.6922 (from testAnalyticContinuousGeometricAveragePrice())
 print( AsianOption("geometric", "put", underlying=80, strike=85, div=-0.03, riskFree=0.05, maturity=0.25, vol=0.2))
 
-# simple call with unnamed parameters
+#.onWindows <- .Platform$OS.type == "windows"
+
+## simple call with unnamed parameters
 
 bond <- list(faceAmount=100,issueDate=as.Date("2004-11-30"),
              maturityDate=as.Date("2008-11-30"), redemption=100 )
@@ -87,9 +89,9 @@ dateparams <-list(settlementDays=1, calendar="UnitedStates/GovernmentBond", busi
 
 
 discountCurve.param <- list(tradeDate=as.Date('2002-2-15'),
-                           settleDate=as.Date('2002-2-15'),
-                           dt=0.25,
-                           interpWhat='discount', interpHow='loglinear')
+                            settleDate=as.Date('2002-2-15'),
+                            dt=0.25,
+                            interpWhat='discount', interpHow='loglinear')
 discountCurve <- DiscountCurve(discountCurve.param, list(flat=0.05))
 
 ZeroCouponBond(bond, discountCurve, dateparams)
@@ -109,11 +111,11 @@ FixedRateBondPriceByYield(,0.0307, 100000, as.Date("2004-11-30"), as.Date("2008-
 
 ## bond.cpp
 
-#Simple call with a flat curve
+## Simple call with a flat curve
 bond <- list(settlementDays=1,
              issueDate=as.Date("2004-11-30"),
              faceAmount=100,
-             accrualDayCounter='Thirty360',
+             dayCounter='Thirty360',
              paymentConvention='Unadjusted')
 schedule <- list(effectiveDate=as.Date("2004-11-30"),
                  maturityDate=as.Date("2008-11-30"),
@@ -140,7 +142,7 @@ FixedRateBond(bond,
               calc,
               discountCurve=discountCurve.flat)
 
-#Same bond calculated from yield rather than from the discount curve
+## Same bond calculated from yield rather than from the discount curve
 yield <- 0.02
 FixedRateBond(bond,
               coupon.rate,
@@ -149,7 +151,7 @@ FixedRateBond(bond,
               yield=yield)
 
 
-#same example with clean price
+                                        #same example with clean price
 price <- 103.31
 FixedRateBond(bond,
               coupon.rate,
@@ -160,10 +162,10 @@ FixedRateBond(bond,
 ## bond.cpp FloatingRateBond, following test-suite/bonds.cpp
 
 bond <- list(faceAmount=100, issueDate=as.Date("2004-11-30"),
-             maturityDate=as.Date("2008-11-30"), redemption=100, 
+             maturityDate=as.Date("2008-11-30"), redemption=100,
              effectiveDate=as.Date("2004-11-30"))
 dateparams <- list(settlementDays=1, calendar="UnitedStates/GovernmentBond",
-                   dayCounter = 'ActualActual', period=2, 
+                   dayCounter = 'ActualActual', period=2,
                    businessDayConvention = 1, terminationDateConvention=1,
                    dateGeneration=0, endOfMonth=0, fixingDays = 1)
 
@@ -195,8 +197,7 @@ tsQuotes <- list(d1w  =0.0382,
 
 discountCurve.flat <- DiscountCurve(params, list(flat=0.05))
 termstructure <- DiscountCurve(params, list(flat=0.03))
-iborIndex.params <- list(type="USDLibor", length=6, 
-                  inTermOf="Month", term=termstructure)                      
-FloatingRateBond(bond, gearings, spreads, caps, floors, 
+iborIndex.params <- list(type="USDLibor", length=6,
+                         inTermOf="Month", term=termstructure)
+FloatingRateBond(bond, gearings, spreads, caps, floors,
                  iborIndex.params, discountCurve.flat, dateparams)
-
